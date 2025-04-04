@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Inter', sans-serif;
-      transition: background-color 0.4s, color 0.4s;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     body {
@@ -25,7 +25,7 @@
     }
 
     body.dark-mode {
-      background: #1e1e2f;
+      background: #121212;
       color: #f0f0f0;
     }
 
@@ -36,12 +36,11 @@
       padding: 2rem;
       max-width: 400px;
       width: 100%;
-      transition: background 0.4s, color 0.4s;
     }
 
     body.dark-mode .weather-app {
-      background: #2b2b3c;
-      color: white;
+      background: #1e1e2e;
+      color: #f0f0f0;
     }
 
     .search-box {
@@ -56,6 +55,14 @@
       border: 1px solid #ccc;
       border-radius: 1rem;
       font-size: 1rem;
+      background-color: white;
+      color: #333;
+    }
+
+    body.dark-mode .search-box input {
+      background-color: #2a2a3a;
+      color: white;
+      border: 1px solid #444;
     }
 
     .search-box button {
@@ -101,22 +108,39 @@
       color: #666;
     }
 
+    body.dark-mode .weather p {
+      color: #ccc;
+    }
+
     .recent-searches {
       margin-top: 1.5rem;
       font-size: 0.9rem;
-      color: #444;
     }
 
     .recent-searches ul {
-      padding-left: 1rem;
+      list-style: disc;
+      padding-left: 1.5rem;
+    }
+
+    .recent-searches li {
+      margin-bottom: 4px;
     }
 
     .toggle-dark {
       margin-bottom: 1rem;
-      cursor: pointer;
-      color: #333;
       text-align: right;
-      font-size: 0.9rem;
+    }
+
+    .toggle-dark button {
+      background: none;
+      border: none;
+      color: #333;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    body.dark-mode .toggle-dark button {
+      color: #f0f0f0;
     }
 
     @media (max-width: 480px) {
@@ -129,7 +153,7 @@
 <body>
   <div class="weather-app">
     <div class="toggle-dark">
-      <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+      <button onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
     </div>
     <div class="search-box">
       <input type="text" id="city" placeholder="Enter city...">
@@ -168,7 +192,7 @@
           <p>Condition: ${data.weather[0].main}</p>
         `;
 
-        // Animate weather card
+        // Animate weather
         weatherBox.style.opacity = 0;
         weatherBox.style.transform = 'translateY(20px)';
         requestAnimationFrame(() => {
@@ -182,7 +206,6 @@
           localStorage.setItem('recentSearches', JSON.stringify(searchList));
           updateRecent();
         }
-
       } catch (error) {
         alert("City not found or error fetching weather.");
       }
