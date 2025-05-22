@@ -1,1 +1,1 @@
-https://axvampire.github.io/weather-app/
+https://alexscholler.github.io/weather-app/
